@@ -47,7 +47,7 @@ brew install zabbix --with-<option1> --with-<option2> ...
 
 ### Installing latest Git version (`HEAD`)
 
-FFmpeg recommends installing the latest Git master version over a release. This formula builds the latest release by default, but you can install the latest Git version by adding the `--HEAD` option:
+Zabbix recommends installing the latest Git master version over a release. This formula builds the latest release by default, but you can install the latest Git version by adding the `--HEAD` option:
 
 ```
 brew install zabbix --HEAD
@@ -61,7 +61,7 @@ To compile and install zabbix with *all* options, just run:
 brew install zabbix $(brew options zabbix --compact)
 ```
 
-Note that this will perform a full build of ffmpeg and its dependencies, which may take a while depending on your machine's capabilities.
+Note that this will perform a full build of zabbix and its dependencies, which may take a while depending on your machine's capabilities.
 
 ## Updating
 
@@ -74,7 +74,7 @@ brew update && brew upgrade zabbix
 Or, if you are using the `HEAD` version and want to update to the latest commit:
 
 ```
-brew update && brew upgrade ffmpeg --fetch-HEAD
+brew update && brew upgrade zabbix --fetch-HEAD
 ```
 
 ## FAQ
@@ -83,13 +83,13 @@ brew update && brew upgrade ffmpeg --fetch-HEAD
 
 Using `brew tap-pin` gives this tap's `zabbix` formula priority over homebrew-core to make installation simpler. Now `zabbix` will refer to this tap's formula.
 
-If you don't want to pin this tap, you can still reference this tap's ffmpeg formula directly with `phoenixadb/zabbix/zabbix`. Tap pinning will not influence an `zabbix` dependency in another formula.
+If you don't want to pin this tap, you can still reference this tap's zabbix formula directly with `phoenixadb/zabbix/zabbix`. Tap pinning will not influence an `zabbix` dependency in another formula.
 
 To unpin the tap, simply run `brew tap-unpin phoenixadb/zabbix`.
 
 ## Issues
 
-To report issues, please [file an issue on GitHub](https://github.com/varenc/homebrew-zabbix/issues). Please note that we will only be able to help with issues that are exclusive to this tap.
+To report issues, please [file an issue on GitHub](https://github.com/phoenixadb/homebrew-zabbix/issues). Please note that we will only be able to help with issues that are exclusive to this tap.
 
 If the problem is reproducible with the `homebrew-core` version of `zabbix`, please file it [on their tracker](https://github.com/Homebrew/homebrew-core/).
 
