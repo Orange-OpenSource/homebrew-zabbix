@@ -87,16 +87,6 @@ If you don't want to pin this tap, you can still reference this tap's ffmpeg for
 
 To unpin the tap, simply run `brew tap-unpin phoenixadb/zabbix`.
 
-### I used the old repository name, what should I do?
-
-This repo was previously named `zabbix-with-options`. While there is a redirect to the new repository name, you should update to the tap's new name. To do so, run:
-
-```
-brew untap phoenixadb/zabbix-with-options
-brew tap phoenixadb/zabbix
-brew tap-pin phoenixadb/zabbix
-```
-
 ## Issues
 
 To report issues, please [file an issue on GitHub](https://github.com/varenc/homebrew-zabbix/issues). Please note that we will only be able to help with issues that are exclusive to this tap.
