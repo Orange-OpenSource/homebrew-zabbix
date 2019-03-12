@@ -10,9 +10,22 @@ class Zabbix < Formula
     sha256 "de98c4192b2c9366affdcfe4c0d8016e53abd5e9ec387bdd9789c81c1f85c292" => :high_sierra
     sha256 "dcd33eb99ad59b69d9bacd7972d96ae58af368589edbb30a6d9562d2976a5031" => :sierra
   end
+  
+  option "with-mysql", "Use Zabbix Server with MySQL library instead PostgreSQL."
+  option "with-sqlite", "Use Zabbix Server with SQLite library instead PostgreSQL."
+  option "without-server-proxy", "Install only the Zabbix Agent without Server and Proxy."
+  deprecated_option "agent-only" => "without-server-proxy"
 
   depends_on "openssl"
   depends_on "pcre"
+  
+  if build.with? "server-proxy"
+    depends_on "mysql" => :optional
+    depends_on "postgresql" if build.without? "mysql"
+    depends_on "fping"
+    depends_on "libevent"
+    depends_on "libssh2"
+  end
 
   def brewed_or_shipped(db_config)
     brewed_db_config = "#{HOMEBREW_PREFIX}/bin/#{db_config}"
@@ -32,6 +45,25 @@ class Zabbix < Formula
       --with-openssl=#{Formula["openssl"].opt_prefix}
     ]
 
+    if build.with? "server-proxy"
+      args += %w[
+        --enable-server
+        --enable-proxy
+        --enable-ipv6
+        --with-net-snmp
+        --with-libcurl
+        --with-ssh2
+      ]
+
+      if build.with? "mysql"
+        args << "--with-mysql=#{brewed_or_shipped("mysql_config")}"
+      elsif build.with? "sqlite"
+        args << "--with-sqlite3"
+      else
+        args << "--with-postgresql=#{brewed_or_shipped("pg_config")}"
+      end
+    end
+    
     if MacOS.version == :el_capitan && MacOS::Xcode.version >= "8.0"
       inreplace "configure", "clock_gettime(CLOCK_REALTIME, &tp);",
                              "undefinedgibberish(CLOCK_REALTIME, &tp);"
@@ -39,6 +71,11 @@ class Zabbix < Formula
 
     system "./configure", *args
     system "make", "install"
+    
+    if build.with? "server-proxy"
+      db = build.with?("mysql") ? "mysql" : "postgresql"
+      pkgshare.install "frontends/php", "database/#{db}"
+    end    
   end
 
   test do
