@@ -17,8 +17,8 @@ In order to use this tap, you need to install Homebrew or Linuxbrew.
 To use, first tap and pin this repo:
 
 ```
-brew tap phoenixadb/zabbix
-brew tap-pin phoenixadb/zabbix
+brew tap Orange-OpenSource/zabbix
+brew tap-pin Orange-OpenSource/zabbix
 ```
 
 **Note:** If you already have `zabbix` installed from Homebrew core, you need to first run `brew uninstall zabbix` before you can use this tap.
@@ -85,7 +85,7 @@ Using `brew tap-pin` gives this tap's `zabbix` formula priority over homebrew-co
 
 If you don't want to pin this tap, you can still reference this tap's zabbix formula directly with `phoenixadb/zabbix/zabbix`. Tap pinning will not influence an `zabbix` dependency in another formula.
 
-To unpin the tap, simply run `brew tap-unpin phoenixadb/zabbix`.
+To unpin the tap, simply run `brew tap-unpin Orange-OpenSource/zabbix`.
 
 ## Issues
 
